@@ -1,0 +1,70 @@
+.singleCoin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .img {
+    padding-top: 2em;
+  }
+  span.symbol {
+    text-transform: uppercase;
+  }
+  .singleCoinCards {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    .card {
+      width: 33%;
+      padding: 1em;
+      background-color: white;
+      margin: 1em;
+      color: black;
+      border-radius: 10px;
+    }
+  }
+
+  .coin-chart {
+    margin-top: 2em;
+    p {
+      text-align: center;
+      font-size: 3em;
+    }
+    .btn-container {
+      display: flex;
+      justify-content: space-evenly;
+      margin-bottom: 2px;
+    }
+    .recharts-wrapper {
+      margin-left: -9em;
+    }
+    .btn-container {
+      margin: 10px auto;
+      align-items: center;
+      width: 90%;
+      cursor: pointer;
+      .active-btn {
+        background: $color1;
+        padding: 2px 4px;
+        border-radius: 10px;
+      }
+      .btn:hover {
+        background: $color1;
+      }
+    }
+  }
+
+  button {
+    background-color: #f1bc0e;
+    border: none;
+    padding: 1em;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #16191d;
+    font-weight: bold;
+    transition-duration: 200ms;
+    margin: 1em;
+    cursor: pointer;
+  }
+  button:hover {
+    transform: scale(1.05);
+  }
+}

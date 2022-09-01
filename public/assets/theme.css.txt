@@ -1,0 +1,19 @@
+/* Webbax - ép. 16 */
+
+/* body */
+#wrapper{background:#fff!important;}
+
+/* header */
+#header{background:#ffad49;}
+#header .header-nav {border-bottom: 2px solid #fff;background-color:#fff;}
+#header .header-top a[data-depth="0"] {color:#fff;}
+#header .top-menu a[data-depth="0"]:hover {color:#fff;}
+#header a:hover {color:#000;}
+.search-widget form input[type=text]{background:#fff;}
+
+/* footer */
+.footer-container{background:#ffad49;}
+.footer-container h3, .footer-container h4{color:#fff!important;}
+.footer-container h3 a{color:#fff!important;}
+.footer-container a{color:#fff!important;}
+.footer-container .block-contact{color:#fff;}
