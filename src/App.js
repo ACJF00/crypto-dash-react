@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalChart from "./components/GlobalChart";
 import HeaderInfos from "./components/HeaderInfos";
 import Table from "./components/Table";
@@ -48,7 +48,8 @@ const App = () => {
         <div className="nav-bar">
           <ul>
             <li>
-              <Link to="/">Accueil</Link>
+              {/* <Link to="/">Accueil</Link> */}
+              <a href="https://thecryptoguetter.netlify.app/">Accueil</a>
             </li>
           </ul>
         </div>
