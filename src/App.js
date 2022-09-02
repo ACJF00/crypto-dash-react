@@ -62,6 +62,12 @@ const App = () => {
           element={<SingleCoin />}
           handler={coinsData.id}
         />
+        <Route
+          exact
+          path="/pages/:id"
+          element={<SearchBar />}
+          handler={coinsData}
+        />
       </Routes>
     </Router>
   );
