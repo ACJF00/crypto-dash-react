@@ -34,7 +34,6 @@ const App = () => {
           <header>
             <HeaderInfos />
             <GlobalChart coinsData={coinsData} />
-            <SearchBar placeholder="Enter a ticker" />
           </header>
           <Table coinsData={coinsData} />
           <ToTop />
@@ -45,13 +44,16 @@ const App = () => {
 
   return (
     <Router>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Accueil</Link>
-          </li>
-        </ul>
-      </nav>
+      <div className="navigation">
+        <div className="nav-bar">
+          <ul>
+            <li>
+              <Link to="/">Accueil</Link>
+            </li>
+          </ul>
+        </div>
+        <SearchBar placeholder="Enter a ticker" coinsData={coinsData} />
+      </div>
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route

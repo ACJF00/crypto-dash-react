@@ -1,31 +1,23 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 
-const SearchBar = ({ placeholder }) => {
+const SearchBar = ({ placeholder, coinsData }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [searchCoin, setSearchCoin] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 
   useEffect(() => {
     let IDdataArray = [];
-
-    axios
-      .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=24h"
-      )
-      .then((res) => {
-        for (let i = 0; i < res.data.length; i++) {
-          let symbol = res.data[i].symbol.toLocaleString();
-          IDdataArray.push({
-            symbol,
-          });
-        }
-        setSearchCoin(IDdataArray);
+    for (let i = 0; i < coinsData.length; i++) {
+      IDdataArray.push({
+        symbol: coinsData[i].symbol,
+        id: coinsData[i].id,
       });
-  }, []);
+    }
+    setSearchCoin(IDdataArray);
+  }, [coinsData]);
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
@@ -66,7 +58,7 @@ const SearchBar = ({ placeholder }) => {
         <div className="dataResult">
           {filteredData.slice(0, 15).map((coin) => {
             return (
-              <a className="dataItem" href={`./pages/${coin.symbol}`}>
+              <a className="dataItem" href={`./pages/${coin.id}`}>
                 {coin.symbol}
               </a>
             );
@@ -78,50 +70,3 @@ const SearchBar = ({ placeholder }) => {
 };
 
 export default SearchBar;
-
-//   const Test = () => {
-//         return (
-//             <div>
-//             searchCoin.map(coin => ({
-//             <><p>Type to filter the list:
-//                         <input
-//                             id="filter"
-//                             name="filter"
-//                             type="text"
-//                             value={coin.id}
-//                             onChange={(event) => setFilter(event.target.value)} />
-//                     </p><ul>
-//                             {searchCoin
-//                                 .filter((f) => f.includes(filter) || filter === "")
-//                                 .map((f) => (
-//                                     <li key={f}>{f}</li>
-//                                 ))}
-//                         </ul></>
-//                     </div>
-//             })
-//         )
-//   })}
-
-//   return searchCoin.map((coin) => <p key={coin.symbol}>{coin.symbol}</p>);
-
-//   return searchCoin.map((coin) => (
-//     <>
-//       <p>
-//         Type to filter the list:
-//         <input
-//           name="filter"
-//           type="text"
-//           key={coin.symbol}
-//           value={coin.symbol}
-//           onChange={(event) => setFilter(event.target.value)}
-//         />
-//       </p>
-//       <ul>
-//         {searchCoin
-//           .filter((f) => f.toString().includes(filter) || filter === "")
-//           .map((f) => (
-//             <li key={f}>{f}</li>
-//           ))}
-//       </ul>
-//     </>
-//   ));

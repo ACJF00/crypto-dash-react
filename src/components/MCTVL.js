@@ -30,10 +30,12 @@ const MCTVL = (SingleCoin) => {
     }
   }, [MCFDVRatio]);
 
-  return (
+  return MCFDVRatio ? (
     <div data-tip={toolTip} style={{ color }}>
       MC/TVL Ratio: {MCFDVRatio}
     </div>
+  ) : (
+    <div className="undisplayed"></div>
   );
 };
 

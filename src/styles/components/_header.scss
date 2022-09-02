@@ -174,10 +174,10 @@ header {
   }
 }
 
-nav {
+.navigation {
   font-size: 2em;
   background-color: mintcream;
-  margin-left: -7.5em;
-  padding-right: 48.5em;
-  padding-left: 4em;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1em;
 }
