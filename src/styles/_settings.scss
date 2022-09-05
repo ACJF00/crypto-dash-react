@@ -38,10 +38,15 @@ body {
   background-size: 2000%;
   font-family: $font1;
   color: $white1;
-  max-width: 1200px;
   margin: 0 auto;
   min-height: 100vh;
 }
+
+.app-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
 li {
   list-style: none;
 }
