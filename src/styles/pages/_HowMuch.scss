@@ -1,0 +1,17 @@
+.how-much {
+  display: flex;
+  padding-top: 100px;
+  flex-direction: column;
+  align-items: center;
+  .token-contract {
+    input {
+      height: 50px;
+      width: 180px;
+      margin: 10px;
+      text-align: center;
+    }
+  }
+  .total-received {
+    font-size: 50px;
+  }
+}
