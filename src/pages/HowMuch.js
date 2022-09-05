@@ -6,6 +6,7 @@ const HowMuch = () => {
   const [addressERC20, setAddressERC20] = useState("");
   const [answerAPI, setAnswerAPI] = useState([]);
   const [total, setTotal] = useState([]);
+  const [decimals, setDecimals] = useState(18);
 
   const handleTokenContract = (event) => {
     const searchTokenContract = event.target.value;
@@ -15,6 +16,12 @@ const HowMuch = () => {
   const handleAddress = (event) => {
     const searchAddress = event.target.value;
     setAddressERC20(searchAddress);
+  };
+
+  const clearToken = () => {
+    setTokenContract("");
+    setAddressERC20("");
+    setTotal([]);
   };
 
   useEffect(() => {
@@ -28,18 +35,37 @@ const HowMuch = () => {
   useEffect(() => {
     let dataArray = [];
     for (let i = 0; i < answerAPI.length; i++) {
-      if (answerAPI[i].to === `${addressERC20}`) {
-        console.log(answerAPI[i].to);
+      let toLower = answerAPI[i]?.to?.toLowerCase();
+      let addressLower = addressERC20?.toLowerCase();
+      if (toLower === addressLower) {
         dataArray.push({
-          ticker: answerAPI[i].tokenSymbol,
-          value: Number(answerAPI[i].value / 1000000000000000000),
+          ticker: answerAPI[0].tokenSymbol,
+          value: Number(answerAPI[i].value),
         });
       }
     }
+    setDecimals(Number(answerAPI[0]?.tokenDecimal));
     setTotal(dataArray);
-  }, [addressERC20, answerAPI]);
+  }, [addressERC20, answerAPI, decimals]);
 
   const totaltotal = total.reduce((a, v) => (a = a + v.value), 0);
+
+  const FinalTotal = () => {
+    if (decimals === 6) {
+      return (
+        <div>
+          {(totaltotal / 1000000).toFixed(2).toLocaleString()} {total[0].ticker}
+        </div>
+      );
+    } else if (decimals === 18) {
+      return (
+        <div>
+          {(totaltotal / 1000000000000000000).toFixed(2).toLocaleString()}{" "}
+          {total[0].ticker}
+        </div>
+      );
+    }
+  };
 
   return (
     <div className="how-much">
@@ -62,10 +88,15 @@ const HowMuch = () => {
       </div>
       {totaltotal !== 0 && (
         <div className="show-total-received">
-          <div className="total-received">{totaltotal}</div>
+          <div className="total-received">
+            <FinalTotal />
+          </div>
           <div>{total.ticker}</div>
         </div>
       )}
+      <button className="btn btn-info" onClick={clearToken}>
+        Clear
+      </button>
     </div>
   );
 };
