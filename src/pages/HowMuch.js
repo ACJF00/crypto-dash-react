@@ -43,6 +43,9 @@ const HowMuch = () => {
 
   return (
     <div className="how-much">
+      <div className="received-intro">
+        <h1>Find out how much did you receive on a particular token</h1>
+      </div>
       <div className="token-contract">
         <input
           type="text"
