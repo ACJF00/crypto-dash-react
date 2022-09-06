@@ -45,18 +45,21 @@ const App = () => {
 
   return (
     <Router>
-      <div className="navigation">
+      {/* <div className="navigation">
         <div className="nav-bar">
           <ul>
-            <li>
+            <li className="navbar_links">
               <Link to="/">Accueil Local</Link>
               <Link to="./pages/HowMuch">How much</Link>
               <a href="https://thecryptoguetter.netlify.app/">Home</a>
             </li>
           </ul>
-        </div>
-        <SearchBar placeholder="Enter a ticker" coinsData={coinsData} />
-      </div>
+          <button className="navbar_burger">
+            <span className="burger_bar"></span>
+          </button>
+        </div> */}
+      <SearchBar placeholder="Enter a ticker" coinsData={coinsData} />
+      {/* </div> */}
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route

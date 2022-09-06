@@ -3,6 +3,7 @@
   padding-top: 100px;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   .token-contract {
     input {
       height: 50px;
@@ -13,5 +14,10 @@
   }
   .total-received {
     font-size: 50px;
+  }
+  button.btn.btn-info {
+    padding: 10px 70px;
+    font-size: 1.2em;
+    cursor: pointer;
   }
 }

@@ -69,3 +69,15 @@
     transform: scale(1.05);
   }
 }
+
+@media screen and (max-width: 767px) {
+  .singleCoin {
+    .singleCoinCards {
+      flex-wrap: wrap;
+      justify-content: center;
+      .card {
+        width: 100%;
+      }
+    }
+  }
+}
