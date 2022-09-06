@@ -79,5 +79,17 @@
         width: 100%;
       }
     }
+    .coin-chart {
+      width: 100%;
+      text-align: center;
+      .recharts-wrapper {
+        width: 100% !important;
+        margin-left: 0;
+      }
+      .recharts-surface {
+        width: 90%;
+        margin-left: -3em;
+      }
+    }
   }
 }

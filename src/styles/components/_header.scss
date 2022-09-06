@@ -174,3 +174,9 @@ header {
     }
   }
 }
+
+@media screen and (max-width: 767px) {
+  header .header-container {
+    padding-right: 0;
+  }
+}
