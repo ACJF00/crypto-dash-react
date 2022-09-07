@@ -1,9 +1,31 @@
+.howmuch-global {
+  width: 50%;
+  margin: auto;
+  margin-top: 100px;
+  label {
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+    justify-content: space-around;
+    width: 40%;
+    margin: auto;
+    select {
+      max-height: 40px;
+      padding: 10px;
+      align-self: center;
+    }
+  }
+}
+
 .how-much {
   display: flex;
-  padding-top: 100px;
+  padding-top: 30px;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  height: 350px;
+  justify-content: space-evenly;
   .token-contract {
     input {
       height: 50px;

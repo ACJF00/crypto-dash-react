@@ -103,18 +103,6 @@ const SearchBar = ({ placeholder, coinsData }) => {
       <button className="navbar_burger" onClick={handleShowLinks}>
         <span className="burger_bar"></span>
       </button>
-      {/* <div className="nav-bar">
-        <ul>
-          <li className={`navbar_links ${showLinks ? "show_nav" : "hide-nav"}`}>
-            <Link to="/">Accueil Local</Link>
-            <Link to="./pages/HowMuch">How much</Link>
-            <a href="https://thecryptoguetter.netlify.app/">Home</a>
-          </li>
-        </ul>
-        <button className="navbar_burger" onClick={handleShowLinks}>
-          <span className="burger_bar"></span>
-        </button>
-      </div> */}
     </nav>
   );
 };

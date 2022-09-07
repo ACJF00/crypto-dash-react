@@ -7,7 +7,9 @@ import Table from "./components/Table";
 import ToTop from "./components/ToTop";
 import SingleCoin from "./pages/SingleCoin";
 import SearchBar from "./components/SearchBar";
-import HowMuch from "./pages/HowMuch";
+// import HowMuch from "./pages/HowMuch";
+// import HowMuchBSC from "./pages/HowMuchBSC";
+import HowMuchGlobal from "./pages/HowMuchGlobal";
 
 const App = () => {
   const [coinsData, setCoinsData] = useState([]);
@@ -74,7 +76,9 @@ const App = () => {
           element={<SearchBar />}
           handler={coinsData}
         />
-        <Route exact path="/pages/howmuch" element={<HowMuch />} />
+        {/* <Route exact path="/pages/howmuch" element={<HowMuch />} />
+        <Route exact path="/pages/howmuchBSC" element={<HowMuchBSC />} /> */}
+        <Route exact path="/pages/howmuchGlobal" element={<HowMuchGlobal />} />
       </Routes>
     </Router>
   );
