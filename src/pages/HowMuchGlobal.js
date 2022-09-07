@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import HowMuchETH from "../components/HowMuchETH";
 import HowMuchBSC from "../components/HowMuchBSC";
+import HowMuchPolygon from "../components/HowMuchPolygon";
 
 const HowMuchGlobal = () => {
   const [network, setNetwork] = useState("ETH");
@@ -9,8 +10,10 @@ const HowMuchGlobal = () => {
   const Render = () => {
     if (network === "ETH") {
       return <HowMuchETH />;
-    } else {
+    } else if (network === "BSC") {
       return <HowMuchBSC />;
+    } else {
+      return <HowMuchPolygon />;
     }
   };
 
@@ -25,6 +28,7 @@ const HowMuchGlobal = () => {
         <select onChange={onChange}>
           <option value="ETH">ETH</option>
           <option value="BSC">BSC</option>
+          <option value="MATIC">Polygon</option>
         </select>
       </label>
       <div className="selected-network">

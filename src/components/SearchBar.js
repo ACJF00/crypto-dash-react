@@ -90,7 +90,7 @@ const SearchBar = ({ placeholder, coinsData }) => {
               <div className="dataResult">
                 {filteredData.slice(0, 15).map((coin) => {
                   return (
-                    <a className="dataItem" href={`./pages/${coin.id}`}>
+                    <a className="dataItem" href={`../pages/${coin.id}`}>
                       {coin.symbol}
                     </a>
                   );
