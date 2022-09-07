@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalChart from "./components/GlobalChart";
 import HeaderInfos from "./components/HeaderInfos";
 import Table from "./components/Table";
