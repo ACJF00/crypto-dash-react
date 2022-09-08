@@ -8,6 +8,12 @@ const HowMuch = () => {
   const [total, setTotal] = useState([]);
   const [decimals, setDecimals] = useState(18);
 
+  const BSCKEY = process.env.REACT_APP_BSC_API_KEY;
+  const ETHKEY = process.env.REACT_APP_ETH_API_KEY;
+  const FTMKEY = process.env.REACT_APP_FTM_API_KEY;
+  const MATICKEY = process.env.REACT_APP_MATIC_API_KEY;
+  const AVAXKEY = process.env.REACT_APP_AVAX_API_KEY;
+
   const handleTokenContract = (event) => {
     const searchTokenContract = event.target.value;
     setTokenContract(searchTokenContract);
@@ -28,19 +34,19 @@ const HowMuch = () => {
     axios
       .all([
         axios.get(
-          `https://api.bscscan.com/api?module=account&action=tokentx&contractaddress=${tokenContract}&address=${address}&page=1&offset=100&startblock=0&endblock=27025780&sort=asc&apikey=ZB8P6UVJGEEC6RTX2GBYPTU9JDHZXX4Z8S`
+          `https://api.bscscan.com/api?module=account&action=tokentx&contractaddress=${tokenContract}&address=${address}&page=1&offset=100&startblock=0&endblock=27025780&sort=asc&apikey=${BSCKEY}`
         ),
         axios.get(
-          `https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=${tokenContract}&address=${address}&page=1&offset=100&startblock=0&endblock=27025780&sort=asc&apikey=9NV4GKH8MXB93DC27DIQWRINTSFDG1TGGR`
+          `https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=${tokenContract}&address=${address}&page=1&offset=100&startblock=0&endblock=27025780&sort=asc&apikey=${ETHKEY}`
         ),
         axios.get(
-          `https://api.ftmscan.com/api?module=account&action=tokentx&contractaddress=${tokenContract}&address=${address}&page=1&offset=100&startblock=0&endblock=87025780&sort=asc&apikey=GUSQQCNYUZAWRKKZ69H2RV4WEUZPFXX5U7`
+          `https://api.ftmscan.com/api?module=account&action=tokentx&contractaddress=${tokenContract}&address=${address}&page=1&offset=100&startblock=0&endblock=87025780&sort=asc&apikey=${FTMKEY}`
         ),
         axios.get(
-          `https://api.polygonscan.com/api?module=account&action=tokentx&contractaddress=${tokenContract}&address=${address}&page=1&offset=100&startblock=0&endblock=87025780&sort=asc&apikey=NHWKQN3GIJPGWNN1V4UCUAV9NBNHCX4M36`
+          `https://api.polygonscan.com/api?module=account&action=tokentx&contractaddress=${tokenContract}&address=${address}&page=1&offset=100&startblock=0&endblock=87025780&sort=asc&apikey=${MATICKEY}`
         ),
         axios.get(
-          `https://api.snowtrace.io/api?module=account&action=tokentx&contractaddress=${tokenContract}&address=${address}&page=1&offset=100&startblock=0&endblock=87025780&sort=asc&apikey=P5798IV26T171JTX4HSZH731JBGVGYGSF8`
+          `https://api.snowtrace.io/api?module=account&action=tokentx&contractaddress=${tokenContract}&address=${address}&page=1&offset=100&startblock=0&endblock=87025780&sort=asc&apikey=${AVAXKEY}`
         ),
       ])
       .then(
@@ -48,7 +54,7 @@ const HowMuch = () => {
           setAnswerAPI(res);
         })
       );
-  }, [address, tokenContract]);
+  }, [AVAXKEY, BSCKEY, ETHKEY, FTMKEY, MATICKEY, address, tokenContract]);
 
   useEffect(() => {
     if (answerAPI[0]?.data?.message === "OK") {
@@ -63,8 +69,6 @@ const HowMuch = () => {
       setAnswerAPI(answerAPI[4].data.result);
     }
   }, [answerAPI]);
-
-  console.log(answerAPI);
 
   useEffect(() => {
     let dataArray = [];
@@ -105,6 +109,10 @@ const HowMuch = () => {
     <div className="how-much">
       <div className="received-intro">
         <h1>Find out how much did you receive on a particular token</h1>
+        <span>
+          This tool works for Ethereum, Avalanche, Polygon, Fantom and BSC
+          tokens
+        </span>
       </div>
       <div>
         Please use{" "}
