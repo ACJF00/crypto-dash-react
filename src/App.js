@@ -7,9 +7,8 @@ import Table from "./components/Table";
 import ToTop from "./components/ToTop";
 import SingleCoin from "./pages/SingleCoin";
 import SearchBar from "./components/SearchBar";
-// import HowMuch from "./pages/HowMuch";
-// import HowMuchBSC from "./pages/HowMuchBSC";
 import HowMuchGlobal from "./pages/HowMuchGlobal";
+import HowMuch from "./pages/HowMuch";
 
 const App = () => {
   const [coinsData, setCoinsData] = useState([]);
@@ -47,21 +46,7 @@ const App = () => {
 
   return (
     <Router>
-      {/* <div className="navigation">
-        <div className="nav-bar">
-          <ul>
-            <li className="navbar_links">
-              <Link to="/">Accueil Local</Link>
-              <Link to="./pages/HowMuch">How much</Link>
-              <a href="https://thecryptoguetter.netlify.app/">Home</a>
-            </li>
-          </ul>
-          <button className="navbar_burger">
-            <span className="burger_bar"></span>
-          </button>
-        </div> */}
       <SearchBar placeholder="Enter a ticker" coinsData={coinsData} />
-      {/* </div> */}
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route
@@ -76,9 +61,8 @@ const App = () => {
           element={<SearchBar />}
           handler={coinsData}
         />
-        {/* <Route exact path="/pages/howmuch" element={<HowMuch />} />
-        <Route exact path="/pages/howmuchBSC" element={<HowMuchBSC />} /> */}
         <Route exact path="/pages/howmuchGlobal" element={<HowMuchGlobal />} />
+        <Route exact path="/pages/howmuch" element={<HowMuch />} />
       </Routes>
     </Router>
   );

@@ -53,7 +53,7 @@ const SearchBar = ({ placeholder, coinsData }) => {
         </li>
         <li className="navbar_item slideInDown-2">
           <Link
-            to="./pages/HowMuchGlobal"
+            to="./pages/HowMuch"
             className="navbar_link"
             onClick={handleShowLinks}
           >
