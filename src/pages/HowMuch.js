@@ -14,6 +14,15 @@ const HowMuch = () => {
   const MATICKEY = process.env.REACT_APP_MATIC_API_KEY;
   const AVAXKEY = process.env.REACT_APP_AVAX_API_KEY;
 
+  const fetchNotes = async () => {
+    const { data } = await axios.get("/api/notes");
+    console.log(data);
+  };
+
+  useEffect(() => {
+    fetchNotes();
+  }, []);
+
   const handleTokenContract = (event) => {
     const searchTokenContract = event.target.value;
     setTokenContract(searchTokenContract);

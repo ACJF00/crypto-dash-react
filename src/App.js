@@ -9,6 +9,9 @@ import SingleCoin from "./pages/SingleCoin";
 import SearchBar from "./components/SearchBar";
 import HowMuchGlobal from "./pages/HowMuchGlobal";
 import HowMuch from "./pages/HowMuch";
+import LoginScreen from "./pages/LoginScreen/LoginScreen";
+import RegisterScreen from "./pages/RegisterScreen/RegisterScreen";
+import Profile from "./pages/Profile";
 
 const App = () => {
   const [coinsData, setCoinsData] = useState([]);
@@ -63,6 +66,9 @@ const App = () => {
         />
         <Route exact path="/pages/howmuchGlobal" element={<HowMuchGlobal />} />
         <Route exact path="/pages/howmuch" element={<HowMuch />} />
+        <Route exact path="/pages/login" element={<LoginScreen />} />
+        <Route exact path="/pages/register" element={<RegisterScreen />} />
+        <Route exact path="/pages/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

@@ -76,6 +76,11 @@ label {
     }
   }
 
+  h1 {
+    color: white;
+    text-align: center;
+  }
+
   @keyframes animLogo {
     50% {
       transform: translateY(3px);

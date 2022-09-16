@@ -2,17 +2,26 @@ import React from "react";
 import { useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { NavDropdown, Nav } from "react-bootstrap";
 
 const SearchBar = ({ placeholder, coinsData }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [searchCoin, setSearchCoin] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
   const [showLinks, setShowLinks] = useState(false);
+  const [userInfos, setUserInfos] = useState("");
 
   const handleShowLinks = () => {
     setShowLinks(!showLinks);
   };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let userInfo = localStorage.getItem("userInfo");
+    setUserInfos(JSON.parse(userInfo));
+  }, []);
 
   useEffect(() => {
     let IDdataArray = [];
@@ -60,6 +69,43 @@ const SearchBar = ({ placeholder, coinsData }) => {
             How much
           </Link>
         </li>
+        <li className="navbar_item slideInDown-2">
+          <Link
+            to="./pages/register"
+            className="navbar_link"
+            onClick={handleShowLinks}
+          >
+            Sign up
+          </Link>
+        </li>
+        <Nav>
+          {userInfos ? (
+            <>
+              <NavDropdown
+                title={`${userInfos.name}`}
+                id="collasible-nav-dropdown"
+              >
+                <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
+
+                <NavDropdown.Divider />
+                <NavDropdown.Item
+                  to="/"
+                  className="navbar_link"
+                  onClick={() => {
+                    localStorage.removeItem("userInfo");
+                    navigate("/");
+                  }}
+                >
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+            </>
+          ) : (
+            <Nav.Link href="./pages/login" onClick={handleShowLinks}>
+              Login
+            </Nav.Link>
+          )}
+        </Nav>
         <li className="navbar_item slideInDown-3">
           <a
             href="https://thecryptoguetter.netlify.app/"
