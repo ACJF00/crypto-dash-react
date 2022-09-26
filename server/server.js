@@ -1,5 +1,6 @@
 // importing the dependencies
 const dotenv = require("dotenv");
+const dotenvExpand = require("dotenv-expand");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -12,6 +13,9 @@ const path = require("path");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
+
+var myEnv = dotenv.config();
+dotenvExpand.expand(myEnv);
 
 // defining the Express app
 const app = express();
