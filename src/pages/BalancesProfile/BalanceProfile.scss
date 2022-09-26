@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  .holdings {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    width: 50%;
+    margin: auto;
+    padding-top: 2em;
+    .holding {
+      width: 100%;
+      display: flex;
+      p {
+        width: 34%;
+        text-align: center;
+      }
+    }
+  }
+  .how-much {
+    width: 50%;
+    margin: auto;
+  }
+}

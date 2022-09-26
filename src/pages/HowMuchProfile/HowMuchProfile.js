@@ -1,10 +1,16 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { useEffect } from "react";
+import { useState } from "react";
+import "./HowMuchProfile.scss";
 
-const HowMuch = () => {
+const HowMuchProfile = () => {
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const [tokenContract, setTokenContract] = useState("");
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState(`${userInfo.address}`);
   const [answerAPI, setAnswerAPI] = useState([]);
   const [total, setTotal] = useState([]);
   const [decimals, setDecimals] = useState(18);
@@ -15,16 +21,40 @@ const HowMuch = () => {
   const MATICKEY = process.env.REACT_APP_MATIC_API_KEY;
   const AVAXKEY = process.env.REACT_APP_AVAX_API_KEY;
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const [profileHoldings, setProfileHoldings] = useState([]);
 
-  const handleTokenContract = (event) => {
-    const searchTokenContract = event.target.value;
+  // console.log(`Adresse: ${address}`);
+  // console.log(`Contrat: ${tokenContract}`);
+  useEffect(() => {
+    let holdingsArray = [];
+
+    axios
+      .all([
+        axios.get(
+          `https://api.ethplorer.io/getAddressInfo/${userInfo.address}?apiKey=freekey`
+        ),
+      ])
+      .then((res) => {
+        console.log(res);
+        for (let i = 0; i < res[0].data.tokens.length; i++) {
+          holdingsArray.push({
+            symbol: res[0].data.tokens[i].tokenInfo.symbol,
+            balance: res[0].data.tokens[i].balance,
+            decimals: res[0].data.tokens[i].tokenInfo.decimals,
+            contract: res[0].data.tokens[i].tokenInfo.address,
+          });
+        }
+        setProfileHoldings(holdingsArray);
+      });
+  }, [userInfo.address]);
+
+  const handleTokenContract = (e) => {
+    const searchTokenContract = e.target.value;
     setTokenContract(searchTokenContract);
   };
 
-  const handleAddress = (event) => {
-    const searchAddress = event.target.value;
+  const handleAddress = (e) => {
+    const searchAddress = e.target.value;
     setAddress(searchAddress);
   };
 
@@ -47,7 +77,7 @@ const HowMuch = () => {
           `https://api.ftmscan.com/api?module=account&action=tokentx&contractaddress=${tokenContract}&address=${address}&page=1&offset=100&startblock=0&endblock=87025780&sort=asc&apikey=${FTMKEY}`
         ),
         axios.get(
-          `https://api.polygonscan.com/api?module=account&action=tokentx&contractaddress=${tokenContract}&address=${address}&page=1&offset=100&startblock=0&endblock=87025780&sort=asc&apikey=${MATICKEY}`
+          `https://api.polygonscan.com/api?module=account&action=tokentx&contractaddress=${tokenContract}&address=${address}}&page=1&offset=100&startblock=0&endblock=87025780&sort=asc&apikey=${MATICKEY}`
         ),
         axios.get(
           `https://api.snowtrace.io/api?module=account&action=tokentx&contractaddress=${tokenContract}&address=${address}&page=1&offset=100&startblock=0&endblock=87025780&sort=asc&apikey=${AVAXKEY}`
@@ -110,48 +140,51 @@ const HowMuch = () => {
   };
 
   return (
-    <div className="how-much">
-      <div className="received-intro">
-        <h1>Find out how much did you receive on a particular token</h1>
-        <span>
-          This tool works for Ethereum, Avalanche, Polygon, Fantom and BSC
-          tokens
-        </span>
+    <div>
+      <div className="profile-holdings">
+        <h1>My holdings</h1>
+        {profileHoldings.map((coin) => {
+          return (
+            <div className="holdings">
+              <button
+                onClick={() => setTokenContract(coin.contract.toLowerCase())}
+              >
+                {coin.symbol}
+              </button>
+              <p>{coin.balance / Math.pow(10, coin.decimals)}</p>
+            </div>
+          );
+        })}
       </div>
-      <div>
-        Please use{" "}
-        <a href="https://www.coingecko.com/" target="_blank" rel="noreferrer">
-          CoinGecko
-        </a>{" "}
-        to find the right token contract
-      </div>
-      <div className="token-contract">
-        <input
-          type="text"
-          placeholder="Token Contract Address"
-          value={tokenContract}
-          onChange={handleTokenContract}
-        />
-        <input
-          type="text"
-          placeholder="ERC20 Address"
-          value={address}
-          onChange={handleAddress}
-        />
-      </div>
-      {totaltotal !== 0 && (
-        <div className="show-total-received">
-          <div className="total-received">
-            <FinalTotal />
-          </div>
-          <div>{total.ticker}</div>
+      <div className="how-much">
+        <div className="token-contract">
+          <input
+            type="text"
+            placeholder="Token Contract Address"
+            value={tokenContract}
+            onChange={handleTokenContract}
+          />
+          <input
+            type="text"
+            placeholder="ERC20 Address"
+            value={address.toLowerCase()}
+            onChange={handleAddress}
+          />
         </div>
-      )}
-      <button className="btn btn-info" onClick={clearToken}>
-        Clear
-      </button>
+        {totaltotal !== 0 && (
+          <div className="show-total-received">
+            <div className="total-received">
+              <FinalTotal />
+            </div>
+            <div>{total.ticker}</div>
+          </div>
+        )}
+        <button className="btn btn-info" onClick={clearToken}>
+          Clear
+        </button>
+      </div>
     </div>
   );
 };
 
-export default HowMuch;
+export default HowMuchProfile;

@@ -11,7 +11,10 @@ import HowMuchGlobal from "./pages/HowMuchGlobal";
 import HowMuch from "./pages/HowMuch";
 import LoginScreen from "./pages/LoginScreen/LoginScreen";
 import RegisterScreen from "./pages/RegisterScreen/RegisterScreen";
-import Profile from "./pages/Profile";
+import ProfileScreen from "./pages/ProfileScreen/ProfileScreen";
+import HowMuchProfile from "./pages/HowMuchProfile/HowMuchProfile";
+// import Moralis from "./pages/Moralis";
+import BalancesProfile from "./pages/BalancesProfile/BalancesProfile";
 
 const App = () => {
   const [coinsData, setCoinsData] = useState([]);
@@ -68,7 +71,17 @@ const App = () => {
         <Route exact path="/pages/howmuch" element={<HowMuch />} />
         <Route exact path="/pages/login" element={<LoginScreen />} />
         <Route exact path="/pages/register" element={<RegisterScreen />} />
-        <Route exact path="/pages/profile" element={<Profile />} />
+        <Route exact path="/pages/profile" element={<ProfileScreen />} />
+        <Route
+          exact
+          path="/pages/howmuchprofile"
+          element={<HowMuchProfile />}
+        />
+        <Route
+          exact
+          path="/pages/balance-profile"
+          element={<BalancesProfile />}
+        />
       </Routes>
     </Router>
   );

@@ -3,7 +3,7 @@ const User = require("../models/userModel");
 const generateToken = require("../utils/generateToken");
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, pic } = req.body;
+  const { name, email, password, address, pic } = req.body;
 
   const userExists = await User.findOne({ email });
 
@@ -16,6 +16,7 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
+    address,
     pic,
   });
 
@@ -24,6 +25,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      address: user.address,
       isAdmin: user.isAdmin,
       pic: user.pic,
       token: generateToken(user._id),
@@ -44,6 +46,7 @@ const authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      address: user.address,
       isAdmin: user.isAdmin,
       pic: user.pic,
       token: generateToken(user._id),
@@ -54,4 +57,32 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { registerUser, authUser };
+const userUpdateProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.address = req.body.address || user.address;
+    user.pic = req.body.pic || user.pic;
+
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+    const udpatedUser = await user.save();
+
+    res.json({
+      _id: udpatedUser._id,
+      name: udpatedUser.name,
+      email: udpatedUser.email,
+      address: udpatedUser.address,
+      pic: udpatedUser.pic,
+      token: generateToken(udpatedUser._id),
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
+module.exports = { registerUser, authUser, userUpdateProfile };

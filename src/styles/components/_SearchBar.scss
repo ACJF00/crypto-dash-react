@@ -7,6 +7,7 @@
   display: flex;
   border: 1px solid black;
   border-radius: 2px;
+  margin-right: 1em;
 }
 
 .search input {
@@ -29,6 +30,7 @@
   background-color: white;
   display: grid;
   place-items: center;
+  color: black;
 }
 
 input:focus {
@@ -42,15 +44,15 @@ input:focus {
   width: 190px;
   max-height: 200px;
   background-color: white;
-  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
   overflow: hidden;
   overflow-y: auto;
   position: absolute;
   z-index: 1;
-  top: 46px;
+  top: 56px;
   font-size: 25px;
   text-transform: uppercase;
   padding-left: 20px;
+  margin-left: 1px;
 }
 
 .dataResult::-webkit-scrollbar {
@@ -64,6 +66,7 @@ input:focus {
   align-items: center;
   color: gray;
   font-size: 15px;
+  text-decoration: none;
 }
 
 .dataItem p {
@@ -122,6 +125,26 @@ a:hover {
     margin-left: 55%;
     align-self: center;
   }
+}
+
+///// BOOTSTRAP NAVBAR
+
+a.navbar_link {
+  margin: auto;
+  text-decoration: none;
+}
+
+.navbar {
+  padding: 0em 1em 0em 1em;
+}
+
+#collasible-nav-dropdown {
+  color: white;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 2em;
 }
 
 @media screen and (max-width: 767px) {

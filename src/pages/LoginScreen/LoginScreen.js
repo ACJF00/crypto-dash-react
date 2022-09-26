@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import axios from "axios";
 import "./LoginScreen.scss";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../actions/user.actions";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+
+  const { loading, error, userInfo } = userLogin;
 
   useEffect(() => {
     const userInfo = localStorage.getItem("userInfo");
@@ -24,30 +28,15 @@ const LoginScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
 
-      setLoading(true);
-
-      const { data } = await axios.post(
-        "/api/users/login",
-        {
-          email,
-          password,
-        },
-        config
-      );
-      console.log(data);
-      localStorage.setItem("userInfo", JSON.stringify(data));
-      setLoading(false);
-    } catch (error) {
-      setError(error.response.data.message);
-    }
+    dispatch(login(email, password));
   };
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/pages/profile");
+    }
+  }, [navigate, userInfo]);
 
   return (
     <div>
