@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
 
 const HowMuch = () => {
   const [tokenContract, setTokenContract] = useState("");
@@ -14,9 +13,6 @@ const HowMuch = () => {
   const FTMKEY = process.env.REACT_APP_FTM_API_KEY;
   const MATICKEY = process.env.REACT_APP_MATIC_API_KEY;
   const AVAXKEY = process.env.REACT_APP_AVAX_API_KEY;
-
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
 
   const handleTokenContract = (event) => {
     const searchTokenContract = event.target.value;
